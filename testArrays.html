@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            max-width: 600px;
+            margin: auto;
+            margin-top: 20px;
+        }
+         input{
+            padding: 15px;
+
+         }
+         input[type= button]
+         { 
+            background-color: brown;
+            color:white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+
+         }
+         input[type=button]::hover{
+            background-color: brown;
+         }
+    </style>
+</head>
+<body>
+    <div id = "output">
+</div>
+<div id="myForm">
+    <form>
+        <input type = "text" placeholder = "FirstName" id="fname">
+        <input type="text" placeholder="LastName" id="lname">
+        <input type="text" placeholder="PhoneNumber" id="phone">
+        <input type="email" placeholder="Email" id="email">
+        <input type="id" placeholders="Id" id="userId">
+        <input type="submit" value="Save" id="saveBtn">
+    </form>
+    </div>
+    <div id = "output">
+
+    </div>
+    <script>
+
+        const btn = document.getElementById('saveBtn');
+        btn.addEventListener('click', function(){
+            alert('Helloooo');
+            const fname= document.getElementById('fname');
+            const lname= document.getElementById('lname');
+            const phone= document.getElementById('phone');
+            const email= document.getElementById('email');
+            const uId= document.getElementById('userId');
+
+            users.push({"firstName" : fname.value, "lastName" : lname.value, "phoneNumber" : phone.value, "email" : email.value, "id": userId}  }
+        })
+
+        const users = [
+            {name: 'Anita', gender: 'Female'},
+            {name: 'Victor', gender: 'Male'},
+            {name: 'Felix', gender: 'Male'},
+            {name: 'Jonathan', gender: 'Male'}
+    ]
+
+    const users2 = [
+        {
+            FirstName: 'Anita',
+            LastName: 'Orji',
+            phoneNumber: '8056472489',
+        }
+        {
+            FirstName: 'Jonah',
+            LastName: 'Bajela',
+            phoneNumber: '8056476389',
+        }
+    ]
+
+            const name = user.map(user => users.names); // Anita, Victor, Felix, Jonathan
+            const gender = user.map(user => users.gender); //Female, Male, Male, Male
+            
+            const newDiv = document.createElementById('div');
+
+            newDiv.id = 'myNewDiv';
+            newDiv.style.backgroundColor = 'rebeccapurple';
+            newDiv.style.justifyContent = 'center'
+            newDiv.textContent = names.join('=');
+            newDiv.style.color = 'white';
+            newDiv.style.padding = '20px';
+            newDiv.style.maxWidth = 'auto'
+            output.appendChild(newDiv);
+
+            newDiv.id = 'myNewDiv2';
+            newDiv.style.backgroundColor = 'darkred';
+            newDiv.style.justifyContent = 'center'
+            newDiv.textContent = names.join('=');
+            newDiv.style.color = 'white';
+            newDiv.style.padding = '20px';
+            newDiv.style.maxWidth = 'auto'
+            output.appendChild(newDiv);
+        
+    </script>
+</body>
+</html>

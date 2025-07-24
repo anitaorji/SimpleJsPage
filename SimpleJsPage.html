@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let  q="select one of the following operations"
+        let selectOption= prompt(q);
+        if (selectOption === "1") {
+            alert("You chose addition");
+            let number1=prompt('Enter the first number: ')
+            alert('First number recieve')
+            let number2=prompt('Enter the second number')
+            alert("Second number recieved");
+            let answer = addNumbers(number1, number2)
+            alert('The result is "+" answer')
+        } 
+        else if (selectOption === "2") {
+            alert("You chose multiplication ");
+            let number1=prompt('Enter the first number: ')
+            alert('First number recieve')
+            let number2=prompt('Enter the second number')
+            alert("Second number recieved");
+            let answer = multiplyNumbers(number1, number2)
+            alert('The result is "*" answer');
+
+        } 
+        else {
+            alert("Invalid selection, please try again.");
+            
+        }
+        function addNumbers(number1, number2)
+        {
+            return Number(number1) + Number(number2)
+        }
+        function multiplyNumbers(number1, number2)
+        {
+            return Number(number1) * (number2)
+        }
+    </script>
+
+</body>
+</html>

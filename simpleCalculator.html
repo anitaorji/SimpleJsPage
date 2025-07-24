@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            padding:0;
+            box-sizing: border-box;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+        }
+        body{
+            background-color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .container{
+            background-color: #111827;
+            padding: 30px;
+            width:350px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0);
+
+        }
+        .calc-text{
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #1f2937;
+            border-radius: 10px;
+
+        }
+        .calc-text p{
+            width: 100%;
+            font-size: 3em;
+            line-height: 0.9;
+            text-align: end;
+            color: #d1d5db;
+            word-wrap: break-word;
+            word-break: break-all ;
+        }
+        button{
+            height: 65px;
+            width:65px;
+            border-radius: 16px;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover{
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        button:active{
+            transform: scale(0.98);
+        }
+        .calc-keys{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+
+        }
+        .key-operators{
+            background-color: #14b8a6;
+            color: white;
+        }
+        .numbers{
+            
+        }
+        .key-others{
+            background-color: #374151;
+            color: #e5e2eb;
+        }
+        .key-zero{
+            grid-column: span 2;
+            width:100%;
+            border-radius: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calc-text">
+            <p>0</p>
+        </div>
+        <div class="calc-keys">
+            <button class="key-others">AC</button>
+            <button class="key-others">DEL</button>
+            <button class="key-others">%</button>
+            <button class="key-operators">/</button>
+            <button class="numbers">7</button>
+            <button class="numbers">8</button>
+            <button class="numbers">9</button>
+            <button class="key-operators">*</button>
+            <button class="numbers">4</button>
+            <button class="numbers">5</button>
+            <button class="numbers">6</button>
+            <button class="key-operators">-</button>
+             <button class="numbers">1</button>
+             <button class="numbers">2</button>
+             <button class="numbers">3</button>
+            <button class="key-operators">+</button>
+            <button class="key-zero numbers">0</button>
+            <button class="numbers">.</button>
+            <button class="key-operators">=</button>
+        </div>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const display = document.querySelector('.calc-text p');
+        let currentInput = '';
+        
+        //handle all button clicks
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                handleButtonClick(button.textContent);
+            });
+        });
+
+
+        // handle keyboard input
+        document.addEventListener('keydown', (e) =>{
+            const key = e.key;
+            //alert(key);
+            if (key==='Enter'){
+               handleButtonClick('=');
+            }
+            else if(key==='Backspace'){
+                handleButtonClick('DEL');
+            }
+            else if(key==='Escape'){
+                handleButtonClick('AC');
+            }
+            else if(/[0-9+\-*/.%]/.test(key)){
+                handleButtonClick(key);
+            }
+        });
+
+        
+
+
+
+
+
+
+
+
+        function handleButtonClick(value) {
+            const operators = ['/', '*', '+', '-'];
+            const lastChar = currentInput[currentInput.length - 1];
+            if (value == 'AC') {
+                currentInput = '';
+                updateDisplay(currentInput);
+            }
+            else if (value === 'DEL') {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay(currentInput);
+            }
+            else if (value === '=') {
+                const result = safeEvaluate(currentInput);
+                updateDisplay(result);
+                currentInput = result.toString();
+            }
+            else {
+                if (operators.includes(value) && operators.includes(lastChar)) {
+                    return;
+                }
+                currentInput += value;
+                updateDisplay(currentInput);
+            }
+        }
+
+        function safeEvaluate(exp) {
+            try {
+                //replace % with division by 100
+                exp = exp.replace(/%/g, '/100'); //g = global (find all occurences for the text)
+                const result = new Function('return ' + exp);
+                return result();
+            }
+            catch (error) {
+                console.error('Error evaluating expression');
+                return 'Error';
+            }
+        }
+
+        function updateDisplay(value) {
+            display.textContent = value || '0';
+        }
+    </script>
+</body>
+</html>
