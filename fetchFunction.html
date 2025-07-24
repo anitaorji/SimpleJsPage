@@ -9,20 +9,27 @@
         #categories div{
             display:flex;
             justify-content: center;
-            background-color: lightblue;
-            border: 1px solid gray;
+            background-color: rgb(31, 7, 245);
+            border: 1px dashed gray;
             border-radius: 15px;
             min-width: 100px;
             min-height: 100px;
             width:auto;
             gap: 10px;
             align-items: center;
-            
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding :10px;
+        color:white;
+        margin-bottom: 10px;
+
+
         }
     </style>
 </head>
 <body>
-    <div id='categories'></div>
+    <div id='categories'>
+        <div>loading....</div>
+    </div>
          <button id="button">click me to fetch data</button>
     <script>
         const categories = document.getElementById('categories');
@@ -36,8 +43,8 @@
        .then(response => response.json())
        .then(posts => {
         let allposts='';
-            posts.forEach(u =>{allposts += u.title + '\n'});
-            categories.innerText=allposts;
+            posts.forEach(u =>{allposts += '<div>'+u.title +  '</div>'});
+            categories.innerHTML = allposts;
        })
        .catch(error => alert(error))
         }
